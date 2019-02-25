@@ -99,7 +99,7 @@ router.post('/create-subscription', async (req, res) => {
   try {
     await sns.createSubscription(topicArn, endpoint)
 
-    const topicName = topicArn.substring(topicArn.lastIndexOf(':') + 1)
+    const topicName = topicArn.includes(':') ? topicArn.substring(topicArn.lastIndexOf(':') + 1) : topicArn
 
     const msg = {
       text: `New subscription created for \`${topicName}\` to post to \`${channelName}\` channel.`,
