@@ -10,7 +10,7 @@ Gets topics from SNS and lists the names of the available topics in the configur
 
 ---
 
-`/list-subscriptions (topic-name)`
+`/list-subscriptions (topic-name | topic-arn)`
 
 List the subscriptions for a given topic. Formats the results in the following ways:
 - for a subscription created by this integration, the output will show which channel the subscription is for
@@ -19,6 +19,6 @@ List the subscriptions for a given topic. Formats the results in the following w
 
 ---
 
-`/create-subscription (channel-name) (topic-name)`
+`/create-subscription (channel-name) (topic-name | topic-arn)`
 
 Creates a new subscription on the specified topic to post to the specified channel when a new message is published to the topic. The `Subject` field of the message takes precedence over the `Message` field.

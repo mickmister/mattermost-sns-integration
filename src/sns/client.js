@@ -50,8 +50,11 @@ module.exports = class SNSClient {
 
   async listSubscriptionsByTopic(topicArn) {
     if (!topicArn.includes(':')) {
+      console.log(`Topic Name: ${topicArn}`)
       topicArn = await this.getArnForName(topicArn)
     }
+
+    console.log(`Topic Arn: ${topicArn}`)
 
     const data = await this.sns.listSubscriptionsByTopic({
       TopicArn: topicArn,
@@ -59,10 +62,16 @@ module.exports = class SNSClient {
     return data.Subscriptions
   }
 
-  async createSubscription(topicARN, endpoint, attributes={}) {
+  async createSubscription(topicArn, endpoint, attributes={}) {
+    if (!topicArn.includes(':')) {
+      console.log(`Topic Name: ${topicArn}`)
+      topicArn = await sns.getArnForName(topicArn)
+    }
+
+    console.log(`Topic Arn: ${topicArn}`)
     const params = {
       Protocol: 'https',
-      TopicArn: topicARN,
+      TopicArn: topicArn,
       Attributes: attributes,
       Endpoint: endpoint,
       ReturnSubscriptionArn: true,

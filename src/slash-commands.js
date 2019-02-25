@@ -89,13 +89,7 @@ router.post('/create-subscription', async (req, res) => {
   }
   console.log(`Channel name: ${channelName}`)
 
-  let topicName = args[1]
-  console.log(`Topic Name: ${topicName}`)
-
-  if (!topicName.includes(':')) {
-    topicArn = await sns.getArnForName(topicName)
-  }
-  console.log(`Topic Arn: ${topicArn}`)
+  const topicArn = args[1]
 
   const hash = `mm-integration-${channelName}-${createHash()}`
 
